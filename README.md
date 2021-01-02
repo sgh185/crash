@@ -12,12 +12,17 @@ UNIX environment, the shell, scripting, makefiles, project organization,
 version control, debugging approaches/tools, profiling approaches/tools, basic 
 C programming, understanding documentation, and more.  
 
-Motivated by personal experience as a CS student and the experiences of 
+Motivated by personal experiences as a CS student and the experiences of 
 my peers at Northwestern. Inspiried by the [Missing Semester at MIT](https://missing.csail.mit.edu/).
 
 ## Breakdown
 
-### Day 1
+### Day 1 — UNIX Environment and the Shell
+	- Navigating the shell
+	- Creating files and directories
+	- Finding files, character sequences, patterns, etc.
+	- Running basic executables and scripts
+	- Understanding basics of documentation (man-pages)
 
 ### Day 2
 
