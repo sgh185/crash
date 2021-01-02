@@ -18,11 +18,11 @@ my peers at Northwestern. Inspiried by the [Missing Semester at MIT](https://mis
 ## Breakdown
 
 ### Day 1 — UNIX Environment and the Shell
-	- Navigating the shell
-	- Creating files and directories
-	- Finding files, character sequences, patterns, etc.
-	- Running basic executables and scripts
-	- Understanding basics of documentation (man-pages)
+- Navigating the shell
+- Creating files and directories
+- Finding files, character sequences, patterns, etc.
+- Running basic executables and scripts
+- Understanding basics of documentation (man-pages)
 
 ### Day 2
 
