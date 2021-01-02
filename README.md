@@ -1,6 +1,5 @@
 # Crash Course on UNIX and Systems Tools 
 
----
 
 ## Overview
 
@@ -15,8 +14,6 @@ C programming, understanding documentation, and more.
 
 Motivated by personal experience as a CS student and the experiences of 
 my peers at Northwestern. Inspiried by the [Missing Semester at MIT](https://missing.csail.mit.edu/).
-
----
 
 ## Breakdown
 
