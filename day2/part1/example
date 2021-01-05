@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# --- TOP --- 
+# A demonstrative script that shows some of the basic 
+# workings of bash scripting 
+#
+# The actual functionality of the script answers the
+# following question: Can you check how many sockets 
+# (according to the netstat utility) are of type "DGRAM"
+# every 5 seconds? Can you output the results to a
+# file? Can you make your script modular? 
+# -----------
+
+
+# 
+# --- Set script variables ---
+# 1) $1, $2, ... : The arguments to the script
+# 2) $_ : The last argument
+# 3) $# : The number of aruguments
+#
+OUT=$1 ;
+
+
+# Error checking function
+
+#
+# 1) [ ] denotes the "test" command ... really.
+#    - '[' is an alias for the "test" utility, and ']'
+#      is a marker to end args passed to "test"
+#    - Using [ ] is usually a shortcut
+#
+# 2) " if test -z ${OUT} " checks if the variable
+#    OUT was empty (-z for zero length). 
+#
+# 3) Important to note that ${ } is used for
+#    parameter expansion. It's safe to refer to
+#    non-single-character-variables using ${}
+#    as you see in ${OUT}
+#
+# 4) if statements in bash have the following format:
+#    
+#    if COND ; then         <-- Need a ' ; then ' (or 'then' on a newline without a ';') 
+#       BODY
+#    elif COND ; then       <-- Another condition (the else if) denoted as "elif"
+#       BODY
+#    else                   <-- Else case does not require a ' ; then'
+#       BODY
+#    fi                     <-- 'fi' Required to end the if statement
+#   
+#
+if [ -z $OUT ] ; then
+        echo "ERROR: Please specify an output" ;
+        exit ;
+
+
+#
+# Test if there already exists a file (-f) called $OUT
+#
+elif [ -f $OUT ] ; then
+        echo "ERROR: $OUT already exists" ;
+        exit ;
+
+fi
+
+
+#
+# Create the file $OUT
+#
+touch $OUT ;
+
+
+#
+# Loop infinitely until someone interrupts the 
+# program and kills it via ctrl-c
+#
+while true ; do 
+    netstat | grep "DGRAM" | wc -l >> $OUT;
+    sleep 1s ; 
+done
