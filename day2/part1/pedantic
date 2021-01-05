@@ -1,23 +1,33 @@
-#!/bin/bash
+#!/usr/bin/bash 
 
 # ^^^ the shebang --- "Hey OS, use the bash interpreter!"
 
 # --- TOP --- 
-# A demonstrative script that shows some of the basic 
-# workings of bash scripting. This is not all inclusive.
-#
-# The actual functionality of the script answers the
-# following question: Can you check how many sockets 
-# (according to the netstat utility) are of type "DGRAM"
-# every 5 seconds? Can you output the results to a
-# file? Can you make your script modular? 
+# See ${verbose}
 # -----------
 
 
 #
 # --- Usage function ---
 # 1) Syntax --- func_name() { ... } 
+# 2) Function is called as: func_name arg1 arg2 ...
 #
+
+verbose="
+--- pedantic ---
+\n
+\nA demonstrative script that shows some of the basic 
+\nworkings of bash scripting. This is not all inclusive.
+\n
+\nThe actual functionality of the script answers the
+\nfollowing question: Can you check how many sockets 
+\n(according to the netstat utility) are of type \"DGRAM\"
+\nevery 5 seconds? Can you output the results to a
+\nfile? Can you make your script modular? 
+\n
+\nUsage: ./pedantic { OUTFILE | -help } [SECONDS] 
+" ;
+
 usage()
 {
     #
@@ -27,28 +37,30 @@ usage()
     #    doesn't even matter if the variable wasn't declared before
     #    this function is even called. It will have global scope.
     # 2) The 'local' keyword will explicitly create a local variable
-    #    with the scope set to this function. Let's say "param"
+    #    with the scope set to this function. Let's say "help"
     #    from below ...
     # 3) The scope of these variables will actually last until this 
-    #    whole function finishes executing. The consequence? "param"
+    #    whole function finishes executing. The consequence? "help"
     #    will be visible to those inner, called functions.
     # 4) ^^ Tricky to get used to, bash follows dynamic scoping, which
     #    is rather uncommon in most modern languages. See more:
     #    http://prl.ccs.neu.edu/blog/2019/09/05/lexical-and-dynamic-scope/
     #
     local help=$1 ; #                     <-- '$1' here refers to the first parameter of 'usage' 
-    local verbose=$2 ; #                  <-- '$2' "                                           " 
 
 
     #
     # See below on more info about if statements
+    # 1)  
     #
-    if [[ "$1" == "-help" ]]
-
+    #
+    if [[ "${help}" == "-help" ]]
     then
-
-    else 
-        echo "Usage: ./dgram { OUTFILE | -help } [SECONDS]" ; 
+        echo -e ${verbose} ;
+        exit 0 ; 
+    elif [ -z "${help}" ] 
+    then
+        echo "ERROR: Usage: ./pedantic { OUTFILE | -help } [SECONDS]" ; 
         exit 1 ; #                        <-- See below about exit code info
     fi
 
@@ -58,6 +70,14 @@ usage()
 }
 
 
+#
+# --- Preliminary ---
+# Call 'usage' to sanity check some inputs
+#
+usage $1 ; #               <-- Passing the script's first argument as the first
+           #                   argument to the 'usage' function
+
+
 
 # 
 # --- Set script variables ---
@@ -65,11 +85,12 @@ usage()
 # 2) $_ : The last argument
 # 3) $# : The number of aruguments
 #
-OUT=$1 ; #                  <-- Variable assignment is "pythonic" ; "OUT" is the var name
-TIME=$2 ; #                 <-- BEWARE --- don't leave spaces around the "=", bash won't recognize
-          #                     the assignment properly
-
-# Error checking function
+OUT=$1 ; #                 <-- Variable assignment is "pythonic" ; "OUT" is the var name
+         #                 <-- BEWARE --- don't leave spaces around the "=", bash won't recognize
+         #                     the assignment properly
+if [ -z $2 ] ; then TIME=1 
+else TIME=$2
+fi ;
 
 
 #
@@ -105,7 +126,7 @@ TIME=$2 ; #                 <-- BEWARE --- don't leave spaces around the "=", ba
 #
 # Don't output to an already existing file 
 #
-if [ -f ${OUT} ] ; then
+if [ -f "${OUT}" ] ; then #                     <-- "${OUT}" to group potentially spaced filenames as one (using quotes) 
     echo "ERROR: ${OUT} already exists" ; 
     exit 1 ; #                                  <-- Error code of 1 upon process termination 
 fi
@@ -114,21 +135,34 @@ fi
 #
 # Create the file OUT
 #
-touch ${OUT} ;
-
+touch "${OUT}" ;
 
 #
+# --- Loops ---
+# 1) while loops in bash have the following format:
+#
+#    while COND ; do        <-- Need a ' ; do ' (or 'do' on a newline without a ';')
+#       BODY
+#    done                   <-- 'done' required to end the while loop 
+#
+# 2) for loops in bash have the following format:
+#
+#    for ITEM in LISTRANGE ; do        <-- Need a ' ; do ' (or 'do' on a newline without a ';')
+#       BODY
+#    done                              <-- 'done' required to end the for loop 
+# 
 # Loop infinitely until someone interrupts the 
 # program and kills it via ctrl-c
 #
-while true ; do 
-    netstat | grep "DGRAM" | wc -l >> ${OUT} ;
-    sleep 1s ; 
+echo "Recording ... CTRL+C to exit" ;
+while true ; do                                       
+    netstat | grep "DGRAM" | wc -l >> "${OUT}" ;
+    sleep ${TIME}s ; 
 done
+
 
 
 # 
 # Finishing ...
 #
 exit 0 ; #                  <-- Being pedantic about return values/exit codes 
-
