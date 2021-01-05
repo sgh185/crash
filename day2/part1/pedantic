@@ -88,9 +88,31 @@ usage $1 ; #               <-- Passing the script's first argument as the first
 OUT=$1 ; #                 <-- Variable assignment is "pythonic" ; "OUT" is the var name
          #                 <-- BEWARE --- don't leave spaces around the "=", bash won't recognize
          #                     the assignment properly
-if [ -z $2 ] ; then TIME=1 
-else TIME=$2
-fi ;
+
+# 1) Setting the TIME variable to either the
+#    optional second input or 1 (for 1s). The
+#    parameter is vetted to be an integer using
+#    a regular expression statement
+# 2) Regular expression in ' [[ "$2" =~ ^[0-9]+$ ]] '
+#    checks of the second argument is a number of 
+#    any kind --- '^' denotes pattern matching at
+#    the start of the string, '$' denotes through
+#    the end of the string. '[ - ]' represents a 
+#    a range of possible values, and '+' is the 
+#    repitition token. In other words, This 
+#    statement will return true if the string is
+#    a repitition of any digit from 0-9. the '=~'
+#    operator in the ' [[ ]] ' evaluator allows
+#    for regular expression matches
+if [ -z "$2" ] ; then 
+    TIME=1 ;
+elif ! [[ "$2" =~ ^[0-9]+$ ]] ; then
+    echo "ERROR: SECONDS parameter must be an positive integer" ;
+    exit 1 ; 
+else 
+    TIME="$2" ;
+fi
+
 
 
 #
