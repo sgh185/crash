@@ -1,8 +1,10 @@
 #!/bin/bash
 
+# ^^^ the shebang --- "Hey OS, use the bash interpreter!"
+
 # --- TOP --- 
 # A demonstrative script that shows some of the basic 
-# workings of bash scripting 
+# workings of bash scripting. This is not all inclusive.
 #
 # The actual functionality of the script answers the
 # following question: Can you check how many sockets 
@@ -12,17 +14,67 @@
 # -----------
 
 
+#
+# --- Usage function ---
+# 1) Syntax --- func_name() { ... } 
+#
+usage()
+{
+    #
+    # --- Setting local variables ---
+    # 1) Variable assignment within a function is same as Line ___,
+    #    HOWEVER these assignments are STILL global assignments. It 
+    #    doesn't even matter if the variable wasn't declared before
+    #    this function is even called. It will have global scope.
+    # 2) The 'local' keyword will explicitly create a local variable
+    #    with the scope set to this function. Let's say "param"
+    #    from below ...
+    # 3) The scope of these variables will actually last until this 
+    #    whole function finishes executing. The consequence? "param"
+    #    will be visible to those inner, called functions.
+    # 4) ^^ Tricky to get used to, bash follows dynamic scoping, which
+    #    is rather uncommon in most modern languages. See more:
+    #    http://prl.ccs.neu.edu/blog/2019/09/05/lexical-and-dynamic-scope/
+    #
+    local help=$1 ; #                     <-- '$1' here refers to the first parameter of 'usage' 
+    local verbose=$2 ; #                  <-- '$2' "                                           " 
+
+
+    #
+    # See below on more info about if statements
+    #
+    if [[ "$1" == "-help" ]]
+
+    then
+
+    else 
+        echo "Usage: ./dgram { OUTFILE | -help } [SECONDS]" ; 
+        exit 1 ; #                        <-- See below about exit code info
+    fi
+
+    #
+    # Bash functions can't return values. Horrible. Instead, 
+    #
+}
+
+
+
 # 
 # --- Set script variables ---
 # 1) $1, $2, ... : The arguments to the script
 # 2) $_ : The last argument
 # 3) $# : The number of aruguments
 #
-OUT=$1 ;
-
+OUT=$1 ; #                  <-- Variable assignment is "pythonic" ; "OUT" is the var name
+TIME=$2 ; #                 <-- BEWARE --- don't leave spaces around the "=", bash won't recognize
+          #                     the assignment properly
 
 # Error checking function
 
+
+#
+# --- If Statements ---
+# See more info about if statements in 'usage'
 #
 # 1) [ ] denotes the "test" command ... really.
 #    - '[' is an alias for the "test" utility, and ']'
@@ -30,7 +82,10 @@ OUT=$1 ;
 #    - Using [ ] is usually a shortcut
 #
 # 2) " if test -z ${OUT} " checks if the variable
-#    OUT was empty (-z for zero length). 
+#    OUT was empty (-z for zero length).
+#
+#    " if test -f ${OUT} " checks if a file of name
+#    OUT already exists.
 #
 # 3) Important to note that ${ } is used for
 #    parameter expansion. It's safe to refer to
@@ -41,32 +96,25 @@ OUT=$1 ;
 #    
 #    if COND ; then         <-- Need a ' ; then ' (or 'then' on a newline without a ';') 
 #       BODY
-#    elif COND ; then       <-- Another condition (the else if) denoted as "elif"
+#    elif COND ; then       <-- Another condition (the else if) denoted as 'elif'
 #       BODY
-#    else                   <-- Else case does not require a ' ; then'
+#    else                   <-- Else case does not require a ' ; then '
 #       BODY
 #    fi                     <-- 'fi' Required to end the if statement
 #   
 #
-if [ -z $OUT ] ; then
-        echo "ERROR: Please specify an output" ;
-        exit ;
-
-
+# Don't output to an already existing file 
 #
-# Test if there already exists a file (-f) called $OUT
-#
-elif [ -f $OUT ] ; then
-        echo "ERROR: $OUT already exists" ;
-        exit ;
-
+if [ -f ${OUT} ] ; then
+    echo "ERROR: ${OUT} already exists" ; 
+    exit 1 ; #                                  <-- Error code of 1 upon process termination 
 fi
 
 
 #
-# Create the file $OUT
+# Create the file OUT
 #
-touch $OUT ;
+touch ${OUT} ;
 
 
 #
@@ -74,6 +122,13 @@ touch $OUT ;
 # program and kills it via ctrl-c
 #
 while true ; do 
-    netstat | grep "DGRAM" | wc -l >> $OUT;
+    netstat | grep "DGRAM" | wc -l >> ${OUT} ;
     sleep 1s ; 
 done
+
+
+# 
+# Finishing ...
+#
+exit 0 ; #                  <-- Being pedantic about return values/exit codes 
+
