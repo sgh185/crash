@@ -21,28 +21,42 @@ my peers at Northwestern. Inspiried by the [Missing Semester at MIT](https://mis
 - Shell navigation 
 - Creating files and directories
 - Finding files, character sequences, patterns, etc.
-- Running basic executables and scripts
 - Understanding documentation with man-pages
 
 ### Day 2 — Structuring Applications 
-- Version control with Git 
-- Scripting with Bash
+- Running basic executables and scripts
+- Text editors (vim)
+- Scripting (with bash)
+- Version control (with git)
 - Makefiles 
 - Compiling your code 
+- Structuring a project
 - Writing (a tiny bit) of code in C
 
 ### Day 3 — Debugging 
-- Overview of debugging strategies 
 - Debugging with prints and assertions 
-- Using breakpoints and GDB
+- Using breakpoints and gdb 
 - Bisection
 - Finding memory corruptions with Valgrind 
 
-### Day 4 — Profiling 
-- 
+### Day 4 — Profiling and Tracing 
+- Running time of applications
+- Traces (with strace and ltrace)
+- What's the bottleneck? (with gprof)
+- Callgraphs and related statistics (with callgrind)
+- Visualization  
 
 ### Day 5 — Building Your Own "Profiler"
+- Building a "package" 
+- Design choices and tradeoffs 
+- Linker tricks (wrapping, LD\_PRELOAD)
+- A look at dynamic memory
+- The final artifact is a profiler to track the distribution
+  of dynamic memory allocations. Students will build the 
+  profiler using C (using some starter code) and incorporate
+  some of the concepts from Day 2 to create a distributable
+  package/source. 
 
 ---
 
-Designed by Souradip Ghosh, January 2021
+Designed by Souradip Ghosh, January 2021. See LICENSE.txt
