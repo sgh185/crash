@@ -10,9 +10,15 @@ int N = 10;
 int recursive_factorial(int n)
 {  
     /*
+     * Check base case
+     */ 
+    if (n == 0) { return 1; }
+
+
+    /*
      * Recurse
      */ 
-    return recursive_factorial(n * (n - 1));
+    return n * recursive_factorial(n - 1);
 }
 
 
@@ -24,7 +30,7 @@ int iterative_factorial(int n)
     /*
      * Iteratively compute using a loop 
      */ 
-    int result = 0;
+    int result = 1;
     for (int i = 2 ; i <= n ; i++)
     {
         result *= i;
