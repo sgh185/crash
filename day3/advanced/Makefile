@@ -10,7 +10,7 @@ OPT:=
 CFLAGS:=-g -I$(INC) # Expands to '-g -I./include'
 LIBS:=-lm
 
-all: clean $(NAME)
+all: $(NAME)
 
 %.o: $(SRC)/%.c
 	$(CC) $(OPT) -c $(CFLAGS) $< -o $@

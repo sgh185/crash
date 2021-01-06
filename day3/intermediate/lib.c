@@ -1,11 +1,6 @@
 #include "lib.h"
 
-/*
- * --- TOP ---
- * A simple library of procedures that involve
- * the use of factorials
- */ 
-
+int N = 10;
 
 /*
  * Recursive factorial calculation
@@ -13,18 +8,9 @@
 int recursive_factorial(int n)
 {  
     /*
-     * Check base case
-     */ 
-    if (n == 0) 
-    { 
-        return 1; 
-    }
-
-
-    /*
      * Recurse
      */ 
-    return n * recursive_factorial(n - 1);
+    return recursive_factorial(n * (n - 1));
 }
 
 
@@ -36,7 +22,7 @@ int iterative_factorial(int n)
     /*
      * Iteratively compute using a loop 
      */ 
-    int result = 1;
+    int result = 0;
     for (int i = 2 ; i <= n ; i++)
     {
         result *= i;
@@ -63,3 +49,5 @@ double sqrt_of_factorial(int n)
      */ 
     return sqrt(factorial);
 }
+
+
