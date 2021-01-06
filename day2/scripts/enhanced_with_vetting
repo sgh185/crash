@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Vetting --- SEE pedantic script for documented
+# explanations (Day 2) about if statments (or 
+# watch the video)
+if [ -z "$1" ] ; then 
+	echo "USAGE: ./myscript { OUTFILE } " ;
+	exit 1 ; 
+elif [ -f "$1" ] ; then 
+	echo -e "ERROR: File \"${1}\" already exists" ;
+	exit 1 ;
+fi
+
+
+OUT="$1";
+
+
+touch ${OUT} ;
+
+while true ; do
+    netstat | grep "DGRAM" | wc -l >> ${OUT} ;
+    sleep 1s ; 
+done 
+
+
+
+

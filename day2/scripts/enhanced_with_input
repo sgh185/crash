@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# See Course Drive (Day 2) for explanations
+
+OUT="$1";
+
+touch ${OUT} ;
+
+while true ; do
+    netstat | grep "DGRAM" | wc -l >> ${OUT} ;
+    sleep 1s ; 
+done 
+
+
+
+

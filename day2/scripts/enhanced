@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Create the file we want to redirect to
+touch ./output ;
+
+while true ; do
+    # Redirect by APPENDING, or else the loop will 
+    # continue to overwrite the file (via '>')
+    netstat | grep "DGRAM" | wc -l >> output ;
+    sleep 1s ; 
+done 
+
+
+
+

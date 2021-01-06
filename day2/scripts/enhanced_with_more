@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Please see Course Drive (Day 2) for documentation
+
+if [ -z "$1" ] ; then 
+	echo "USAGE: ./myscript { OUTFILE } [SECONDS]" ;
+	exit 1 ; 
+elif [ -f "$1" ] ; then 
+	echo -e "ERROR: File \"${1}\" already exists" ;
+	exit 1 ;
+fi
+
+OUT="$1";
+
+if [ -z "$2" ] ; then 
+	TIME=1 ;
+elif ! [[ "$2" =~ ^[0-9]+$ ]] ; then 
+	echo "ERROR: SECONDS parameter must be an positive integer" ;
+	exit 1 ;
+else 
+	TIME="$2" ;
+fi
+
+
+touch ${OUT} ;
+
+while true ; do
+    netstat | grep "DGRAM" | wc -l >> ${OUT} ;
+    sleep ${TIME}s ; 
+done 
+
+
+
+

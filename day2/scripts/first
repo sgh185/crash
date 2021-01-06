@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Can you check how many sockets (according to netstat) 
+# are of type DGRAM every 5 seconds? ***
+
+# We said --- “would be nice to check in a loop, 
+# maybe use a script, and view the output incrementally …”
+
+while true ; do # <-- ' while COND ; do ' syntax is required  
+    netstat | grep "DGRAM" | wc -l ; # <-- separator with ';'
+    sleep 5s ; 
+done # <-- ' done ' is required to end the loop
+
+
+
+
