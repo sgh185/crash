@@ -1,0 +1,32 @@
+Pitfalls/shortcomings from the first iteration:
+- Class time too short --- not enough material covered
+- Need a more motivational and exciting example set
+  for the first day
+- Need to cover more useful UNIX utilities (find, sed, etc.)
+- Need more slides-based material for vim
+- "Dummy" library should be replaced with code that
+  may end up being useful to the student
+- Workshop should end with an artifact for the student 
+  (see below)
+
+
+Future planning:
+- High school deployment, possible partnerships with 
+  Northwestern Academy, OCEP, etc.
+- Expand to 7 days --- Day 6, 7 in the works
+
+
+Future material:
+- Profilers and tracing (gprof, l/strace, callgrind)
+- Debugging and development strategies (bisection,
+  preventative programming (i.e. assertions, etc.), 
+  test-based development,  
+- Project configuration setups (autoconf, etc.)
+- Final artifact: Students build a profiler to track the 
+  distribution of dynamic memory allocations (cover intro to
+  dynamic memory). Students will build the profiler using C
+  (using some starter code, will cover linker tricks, LD_PRELOAD,
+  etc.) and incorporate some of the concepts from the workshop 
+  to create a distributable package/source. 
+
+
