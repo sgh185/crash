@@ -1,7 +1,5 @@
 #include "lib.h"
 
-int N = 10;
-
 /*
  * Recursive factorial calculation
  */ 

@@ -1,5 +1,7 @@
 #include "lib.h"
 
+int N = 10;
+
 int main(int argc, char *argv[])
 {
     /*
