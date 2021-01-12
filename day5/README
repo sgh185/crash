@@ -1,0 +1,7 @@
+Covers the following:
+- Modular makefile structure
+- Modular project layout
+- Debugging with gdb and Valgrind
+- NOTE --- Covers version control implicitly (those
+  following along should still continue to commit
+  frequently as in the videos)
