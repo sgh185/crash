@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# Vetting --- SEE pedantic script for documented
-# explanations (Day 2) about if statments (or 
-# watch the video)
+# Vetting --- SEE pedantic script (./pedantic) for documented
+# explanations about if statments (covered in day2.pdf, slide 28)
+
+
+# Fetch the first parameter
 if [ -z "$1" ] ; then 
 	echo "USAGE: ./myscript { OUTFILE } " ;
 	exit 1 ; 
@@ -15,8 +17,11 @@ fi
 OUT="$1";
 
 
+# Create the output file
 touch ${OUT} ;
 
+
+# Run the command on a delay
 while true ; do
     netstat | grep "DGRAM" | wc -l >> ${OUT} ;
     sleep 1s ; 

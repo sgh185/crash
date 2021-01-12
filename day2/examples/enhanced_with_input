@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# See Course Drive (Day 2) for explanations
+# See day2.pdf (slide 27) for explanations
 
 OUT="$1";
 
