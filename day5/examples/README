@@ -1,0 +1,8 @@
+These examples expand on the following:
+- ./broken expands on better project structure and a 
+  more powerful makefile --- but it's broken when 
+  compiling and running and test program 'myprog'
+- ./correct has the fixed library code so that the 
+  test program compiles and behaves correct, used to
+  demonstrate debugging with gdb. ./correct/src/test.c 
+  also commented out dummy code to demonstrate valgrind
