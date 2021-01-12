@@ -25,7 +25,7 @@ verbose="
 \nevery 5 seconds? Can you output the results to a
 \nfile? Can you make your script modular? 
 \n
-\nUsage: ./pedantic { OUTFILE | -help } [SECONDS] 
+\nUsage: ./pedantic OUTFILE|-help [SECONDS] 
 " ;
 
 usage()
@@ -60,7 +60,7 @@ usage()
         exit 0 ; 
     elif [ -z "${help}" ] 
     then
-        echo "ERROR: Usage: ./pedantic { OUTFILE | -help } [SECONDS]" ; 
+        echo "ERROR: Usage: ./pedantic OUTFILE|-help [SECONDS]" ; 
         exit 1 ; #                        <-- See below about exit code info
     fi
 
@@ -106,7 +106,7 @@ OUT=$1 ; #                 <-- Variable assignment is "pythonic" ; "OUT" is the 
 #    for regular expression matches
 if [ -z "$2" ] ; then 
     TIME=1 ;
-elif ! [[ "$2" =~ ^[0-9]+$ ]] ; then
+elif ! [[ "$2" =~ ^[1-9][0-9]*$ ]] ; then
     echo "ERROR: SECONDS parameter must be an positive integer" ;
     exit 1 ; 
 else 
