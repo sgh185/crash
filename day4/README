@@ -1,0 +1,5 @@
+Covers the following:
+- Basic version control (with git)
+- Introductory makefiles
+- Separate compilation
+- Common compilation bugs (multiple definition, linking)
