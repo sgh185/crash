@@ -1,0 +1,5 @@
+The scripts used in Day 2 to cover bash scripting
+- ./first and ./enhanced* are buildup scripts to solve
+  the problem described in slides 6-7 of day2.pdf 
+- ./pedantic is a documented, in-depth tour of solving
+  the same problem using a bash script
