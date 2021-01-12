@@ -1,0 +1,5 @@
+Covers the following:
+- More bash scripting (if statements, globals, arguments, etc.)
+- Compilation (using gcc)
+- Introductory project structure (organizing headers, sources,
+  library code, test code, etc.)
