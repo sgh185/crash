@@ -26,4 +26,5 @@ my peers at Northwestern. Inspiried by the [Missing Semester at MIT](https://mis
 
 ---
 
-Designed by Souradip Ghosh, January 2021. See LICENSE.txt
+Designed by Souradip Ghosh, January 2021 in conjunction with the
+Department of Computer Science @ Northwestern University. See LICENSE.txt
