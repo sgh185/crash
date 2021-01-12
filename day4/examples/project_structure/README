@@ -1,0 +1,5 @@
+This project structure improves on the code from Day 3:
+- Adds a makefile to help with separate compilation
+- Fixed compilation errors (extern in lib.h, -lm, etc.)
+- NOTE --- when following along with lecture and videos, 
+  the code/makefiles should be committed to a repo frequently
