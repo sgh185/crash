@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Please see day3.pdf (slides 7-8) and/or the pedantic
+# script (in ../day2/examples) for documentation
+
+
+# Fetch the first parameter
+if [ -z "$1" ] ; then 
+	echo "USAGE: ./myscript OUTFILE [SECONDS]" ;
+	exit 1 ; 
+elif [ -f "$1" ] ; then 
+	echo -e "ERROR: File \"${1}\" already exists" ;
+	exit 1 ;
+fi
+
+OUT="$1";
+
+
+# Fetch the second parameter if possible (SECONDS)
+if [ -z "$2" ] ; then 
+	TIME=1 ;
+elif ! [[ "$2" =~ ^[0-9]*$ ]] ; then 
+	echo "ERROR: SECONDS parameter must be an positive integer" ;
+	exit 1 ;
+else 
+	TIME="$2" ;
+fi
+
+
+# Create the output file
+touch ${OUT} ;
+
+
+# Run the command on a delay
+while true ; do
+    netstat | grep "DGRAM" | wc -l >> ${OUT} ;
+    sleep ${TIME}s ; 
+done 
+
+
+
+

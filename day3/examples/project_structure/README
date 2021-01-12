@@ -1,0 +1,3 @@
+A start to the "project structure" activity for Day 3.
+- ./init contains a broken dummy math library (lib.c) to work on
+- ./improvement improves only the structure for the code in ./init
